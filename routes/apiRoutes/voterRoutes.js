@@ -18,7 +18,6 @@ router.get('/voters', (req, res) => {
             data: rows,
         });
     });
-
 });
 
 // Get single voter
@@ -38,13 +37,11 @@ router.get('/voter/:id', (req, res) => {
             data: row
         });
     });
-
 });
 
 router.post('/voter', ({ body }, res) => {
     // Data validation
     const errors = inputCheck(body, 'first_name', 'last_name', 'email');
-
     if (errors) {
         res.status(400).json({ error: errors });
         return;
@@ -64,7 +61,6 @@ router.post('/voter', ({ body }, res) => {
             data: body
         });
     });
-
 });
 
 router.put('/voter/:id', (req, res) => {
@@ -94,7 +90,6 @@ router.put('/voter/:id', (req, res) => {
             });
         }
     });
-
 })
 
 router.delete('/voter/:id', (req, res) => {
@@ -102,7 +97,6 @@ router.delete('/voter/:id', (req, res) => {
     const sql = `DELETE FROM voters WHERE id = ?`;
 
     db.query(sql, req.params.id, (err, result) => {  
-
         if (err) {
             res.status(400).json({ error: res.message });
         } else if (!result.affectedRows) {
@@ -117,7 +111,6 @@ router.delete('/voter/:id', (req, res) => {
             });
         }
     });
-
 });
 
 module.exports = router;

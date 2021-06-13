@@ -23,7 +23,6 @@ router.get('/candidates', (req, res) => {
         data: rows
       });
     });
-
 });
   
 // Get a single candidate
@@ -49,7 +48,6 @@ router.get('/candidate/:id', (req, res) => {
         data: row
       });
     });
-
 });
   
 // Create a candidate
@@ -82,21 +80,18 @@ router.post('/candidate', ({ body }, res) => {
         changes: result.affectedRows
       });
     });
-
 });
   
 // Update a candidates party
 router.put('/candidate/:id', (req, res) => {
 
     const errors = inputCheck(req.body, 'party_id');
-
     if (errors) {
       res.status(400).json({ error: errors });
       return;
     }
   
-    const sql = `UPDATE candidate SET party_id = ?
-                 WHERE id = ?`;
+    const sql = `UPDATE candidate SET party_id = ? WHERE id = ?`;
     const params = [req.body.party_id, req.params.id];
   
     db.query(sql, params, (err, result) => {
@@ -115,12 +110,11 @@ router.put('/candidate/:id', (req, res) => {
         });
       }
     });
-
 });
   
 // Delete a candidate
 router.delete('/candidate/:id', (req, res) => {
-
+    
     const sql = `DELETE FROM candidates WHERE id = ?`;
     const params = [req.params.id];
   
@@ -139,7 +133,6 @@ router.delete('/candidate/:id', (req, res) => {
         });
       } 
     });
-
 });
 
 module.exports = router;

@@ -18,7 +18,6 @@ router.get('/parties', (req, res) => {
         data: rows
       });
     });
-
 });
   
 // Get single party
@@ -38,7 +37,6 @@ router.get('/party/:id', (req, res) => {
         data: row
       });
     });
-
 });
   
 // Delete a party
@@ -63,7 +61,6 @@ router.delete('/party/:id', (req, res) => {
         });
       }
     });
-
 });
 
 module.exports = router;
