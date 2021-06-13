@@ -13,7 +13,6 @@ router.get('/candidates', (req, res) => {
                  ON candidates.party_id = parties.id`;
   
     db.query(sql, (err, rows) => {
-
       if (err) {
         res.status(500).json({ error: err.message });
         return;
@@ -23,7 +22,6 @@ router.get('/candidates', (req, res) => {
         message: 'success',
         data: rows
       });
-
     });
 
 });
@@ -41,7 +39,6 @@ router.get('/candidate/:id', (req, res) => {
     const params = [req.params.id];
   
     db.query(sql, params, (err, row) => {
-
       if (err) {
         res.status(400).json({ error: err.message });
         return;
@@ -51,7 +48,6 @@ router.get('/candidate/:id', (req, res) => {
         message: 'success',
         data: row
       });
-
     });
 
 });
@@ -85,7 +81,6 @@ router.post('/candidate', ({ body }, res) => {
         data: body,
         changes: result.affectedRows
       });
-
     });
 
 });
@@ -105,7 +100,6 @@ router.put('/candidate/:id', (req, res) => {
     const params = [req.body.party_id, req.params.id];
   
     db.query(sql, params, (err, result) => {
-
       if (err) {
         res.status(400).json({ error: err.message });
         // check if a record was found
@@ -120,7 +114,6 @@ router.put('/candidate/:id', (req, res) => {
           changes: result.affectedRows
         });
       }
-
     });
 
 });
@@ -132,7 +125,6 @@ router.delete('/candidate/:id', (req, res) => {
     const params = [req.params.id];
   
     db.query(sql, params, (err, result) => {
-
       if (err) {
         res.statusMessage(400).json({ error: res.message });
       } else if (!result.affectedRows) {
@@ -145,8 +137,7 @@ router.delete('/candidate/:id', (req, res) => {
           changes: result.affectedRows,
           id: req.params.id
         });
-      }
-      
+      } 
     });
 
 });

@@ -8,7 +8,6 @@ router.get('/voters', (req, res) => {
     const sql = `SELECT * FROM voters ORDER BY last_name`;
 
     db.query(sql, (err, rows) => {
-
         if(err) {
             res.status(500).json({ error: err.message });
             return;
@@ -18,19 +17,17 @@ router.get('/voters', (req, res) => {
             message: 'success',
             data: rows,
         });
-
     });
 
 });
 
 // Get single voter
 router.get('/voter/:id', (req, res) => {
-    
+
     const sql = `SELECT * FROM voters WHERE id = ?`;
     const params = [req.params.id];
 
     db.query(sql, params, (err, row) => {
-
         if (err) {
             res.status(400).json({ error: err.message });
             return;
@@ -40,13 +37,11 @@ router.get('/voter/:id', (req, res) => {
             message: 'success',
             data: row
         });
-
     });
 
 });
 
 router.post('/voter', ({ body }, res) => {
-
     // Data validation
     const errors = inputCheck(body, 'first_name', 'last_name', 'email');
 
@@ -59,7 +54,6 @@ router.post('/voter', ({ body }, res) => {
     const params = [body.first_name, body.last_name, body.email];
 
     db.query(sql, params, (err, result) => {
-
         if (err) {
             res.status(400).json({ error: err.message });
             return;
@@ -69,13 +63,11 @@ router.post('/voter', ({ body }, res) => {
             message: 'success',
             data: body
         });
-
     });
 
 });
 
 router.put('/voter/:id', (req, res) => {
-
     // Data validation
     const errors = inputCheck(req.body, 'email');
     
@@ -88,7 +80,6 @@ router.put('/voter/:id', (req, res) => {
     const params = [req.body.email, req.params.id];
 
     db.query(sql, params, (err, result) => {
-
         if (err) {
             res.status(400).json({ error: err.message });
         } else if (!result.affectedRows) {
@@ -102,7 +93,6 @@ router.put('/voter/:id', (req, res) => {
                 changes: result.affectedRows
             });
         }
-
     });
 
 })
@@ -111,8 +101,8 @@ router.delete('/voter/:id', (req, res) => {
     
     const sql = `DELETE FROM voters WHERE id = ?`;
 
-    db.query(sql, req.params.id, (err, result) => {
-        
+    db.query(sql, req.params.id, (err, result) => {  
+
         if (err) {
             res.status(400).json({ error: res.message });
         } else if (!result.affectedRows) {
@@ -126,7 +116,6 @@ router.delete('/voter/:id', (req, res) => {
                 id: req.params.id
             });
         }
-
     });
 
 });
